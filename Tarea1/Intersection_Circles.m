@@ -1,17 +1,19 @@
 %% Encontrar el área de intersección entre 2 círculos.
 clc; clear all; close all;
-r1 = 2; r2 = 2;
-c1 = [-1 0]; c2 = [1 0];
-K = 1000;
+r1 = 3; r2 = 3.5;
+c1 = [3 5]; c2 = [5 6];
+K = 10000;
 %% Teoric Area
 d = sqrt((c2(1) - c1(1))^2 + (c2(2) - c1(2))^2);
 d1 = (r1^2 - r2^2 + d^2) / (2*d);
 d2 = d - d1;
 ATeoric = r1^2 * acos(d1 / r1) - d1 * sqrt(r1^2 - d1^2) + r2^2 * acos(d2 / r2) - d2 * sqrt(r2^2 - d2^2)
 %% Points of circles' intersection
+% Let's create a general line that goes through both centers, so... the
+% results are:
 x1I = c2(1) - r2; x2I = c1(1) + r1;
-y1I = c1(2) - sqrt(r1^2 - (c1(1) + (x2I - x1I) / 2 - c1(1))^2);
-y2I = c1(2) + sqrt(r1^2 - (c1(1) + (x2I - x1I) / 2 - c1(1))^2);
+y1I = c2(2) - r2;
+y2I = c1(2) + r1;
 %% Random points of Xs & Ys [a, b]
 a = x1I; b = x2I; x = (b-a).*rand(K,1) + a;
 a = y1I; b = y2I; y = (b-a).*rand(K,1) + a;
