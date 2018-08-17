@@ -1,4 +1,4 @@
-#Monte Carlo
+# Monte Carlo
 ```
 MC = Area of Any Figure / Area of Figure that encapsule
 ```
