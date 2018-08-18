@@ -26,3 +26,6 @@ codegen/
 
 # Octave session info
 octave-workspace
+
+# Mac junk
+.DS_Store

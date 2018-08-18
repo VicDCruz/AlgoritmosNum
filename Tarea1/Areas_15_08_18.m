@@ -1,7 +1,7 @@
 % close all; clear; clc;
 M = 100;
 N = 50;
-K = 2000;
+K = 200;
 mediaTeorica = pi/4;
 sdTeorica = sqrt((pi/4) * (1-pi/4));
 A = zeros(M,N);
