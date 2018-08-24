@@ -36,7 +36,7 @@ R22 = C(3,2)^2;
 %
 %  ciclo de tandas
 %
-parfor n = 1:N
+for n = 1:N
     k = K * n; 
     for m = 1:M
        x = xmin + dx * rand(1,k);

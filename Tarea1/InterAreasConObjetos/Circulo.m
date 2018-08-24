@@ -10,7 +10,8 @@ classdef Circulo < Figura2D
            else
              fig2d_args{1} = x;
              c = r;
-           end  
+           end
+           % Llamar super métodos en subclases de objetos (V.C.)
            obj@Figura2D(fig2d_args{:}); % Poner la figura al objeto
            obj.radio  = c;
        end

@@ -5,7 +5,8 @@ K = 200;
 mediaTeorica = pi/4;
 sdTeorica = sqrt((pi/4) * (1-pi/4));
 A = zeros(M,N);
-for n = 1:N %% cantidad de columnas
+tic
+parfor n = 1:N %% cantidad de columnas
     k = K * n; %% datos de cada muestreo por ensayo en la columna
     for m= 1:M
         x = rand(k,1);
@@ -13,6 +14,7 @@ for n = 1:N %% cantidad de columnas
         A(m,n) = sum(x.*x + y.*y <= 1) / k;
     end
 end
+toc
 mA = mean(A);
 sdA = std(A);
 
