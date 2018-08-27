@@ -30,14 +30,16 @@ function [areas,tamRect] = calcInterseccAreasFiguras_01(figs,N)
   dos_a_la_nf = 2^nf;
   vd = cumprod([1;2*ones(nf-1,1)]); % Saber en donde cayeron los ptos. (VC)
   d = zeros(1,dos_a_la_nf);
-  for t = 1:N
-    for k = 1:nf
+  for t = 1:N % Para cada punto
+    for k = 1:nf % Para cada figura
       c(k) = figs{k}.contiene(p(:,t)); % Ineficiente (VC)
       % checa si para cada punto cae dentro de la figura (VC)
     end
-    w = c*vd; % Producto punto de donde quedará el 2^N (VC)
+    w = c*vd; % Producto punto de donde quedará el 2^N (VC).
+        % # decimal de binario, porque se encendieron ciertas figuras
+        % c es como bits por cada figura
     if w == 0, w = dos_a_la_nf; end 
-    d(w) = d(w) + 1;
+    d(w) = d(w) + 1; % Aquí están todas las intersecciones de todas las figs
   end
   tamRect = dx * dy;
   areas = d * tamRect / N;
