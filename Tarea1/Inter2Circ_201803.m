@@ -17,10 +17,11 @@ tic
 R = 2.0;
 C = [ -0.5*R,0.5*R; 0.0,0.0;R,R]; %% C = [X0,X1; Y0,Y1;R0,R1]
 %
-K = 100;
+K = 10;
 M = 500;
 N = 200;
 A=zeros(M,N);
+probs = zeros(M,N); % VC
 %%
 %% Rectángulo de trabajo
 %%
@@ -36,7 +37,7 @@ R22 = C(3,2)^2;
 %
 %  ciclo de tandas
 %
-for n = 1:N
+parfor n = 1:N
     k = K * n; 
     for m = 1:M
        x = xmin + dx * rand(1,k);
@@ -44,6 +45,7 @@ for n = 1:N
        c1 = ( x - C(1,1) ).^ 2 + ( y - C(2,1) ) .^2 <= R12;
        c2 = ( x - C(1,2) ).^ 2 + ( y - C(2,2) ) .^2 <= R22;
        A(m,n) = sum( c1 .* c2 ) * dxdy / k;
+       probs(m,n) = sum(c1.*c2) / k; % modif. VC
     end
 end 
 toc
@@ -68,3 +70,10 @@ for n=1:N
     D(n)=sum((AreaTeorica-stdAteorica(n)<=A(:,n)).*(A(:,n)<=AreaTeorica+stdAteorica(n)));
 end
 porcEnsayos = D/M;
+
+
+%% VC
+mProbs = sum(probs) / M;
+cv = sqrt((1 - mProbs)./(M * mProbs));
+sum(cv < .10) / N
+plot((1:N),(mProbs / (.10 + 1)) * dxdy)
