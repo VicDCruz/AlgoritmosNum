@@ -11,7 +11,8 @@ dx = vxtrms(1,2) - vxtrms(1,1);
 dy = vxtrms(2,2) - vxtrms(2,1);
 dxdy = dx * dy;
 j=1;
-alpha=10;
+er=.10;
+coef = .90;
 M = 50;
 N = 40;
 K = 10;
@@ -29,7 +30,7 @@ while n <= N  % para cada columna
       proporcion = cuenta / k;
       A(m,n) = dxdy * proporcion;
     end
-    if std(A(:,n))/mean(A(:,n))<.10 && j==1
+    if std(A(:,n))/mean(A(:,n))<er && j==1
         j=n;
         n=N;
     end
@@ -41,13 +42,16 @@ p = mean(A) / dxdy;
 stdAteorica=dxdy*sqrt(p.*(1-p))./sqrt(K*(1:N));
 mA = mean(A);
 sA = std(A);
-err=sA./mA
+cv=sA./mA;
 figure(1)
-plot([1:1:40],err);
+hold on;
+plot(cv)
+plot((1:N), er, '+')
+hold off;
+title('Coeficiente de variación');
 % hold off
 figure(2)
 hold on
-A;
 plot(A','.')
 plot((1:N),ones(1,N)*AreaTeorica)
 plot((1:N),mA,'o')
@@ -56,9 +60,13 @@ plot((1:N),mA - sA,'+')
 plot((1:N),AreaTeorica + stdAteorica)
 plot((1:N),AreaTeorica - stdAteorica)
 
-fprintf('Con una confianza de %3.1f porciento \nel área está entre %4.2f y %4.2f \ncon %3d ensayos mínimos\ny una estimación puntual de %3.2f'...
-    ,(100-alpha),mA(j)-sA(j)*icdf('Normal',1-alpha/200,0,1),mA(j)+sA(j)*icdf('Normal',1-alpha/200,0,1)...
-    ,j*K,mA(j));
+% zValue = norminv(1-alpha/2);
+% zValue = icdf('Normal',coef,0,1);
+zValue = norminv(coef + (1-coef)/2);
+cotaInf = mA(j)-sA(j)*zValue/sqrt(M);
+cotaSup = mA(j)+sA(j)*zValue/sqrt(M);
+fprintf('Confianza = %3.1f (´/,) \nEl área está entre %4.2f y %4.2f \ncon %3d ensayos mínimos\ny una estimación puntual de %3.2f, cuando n=%2.0f',...
+    (1-er)*100,cotaInf,cotaSup,j*K,mA(j), j);
 % D=zeros(1,N);
 % for n=1:N
 %     D(n)=sum((AreaTeorica-stdAteorica(n)<=A(:,n)).*(A(:,n)<=AreaTeorica+stdAteorica(n)));
