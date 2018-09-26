@@ -9,7 +9,7 @@ function yLag = interpLagrange(xi, yi, xVal)
         producto = yi(i);
         for j = 1:n
             if j ~= i
-                producto = producto * (xVal - xi(j))/(xi(i) - xi(j));
+                producto = producto .* (xVal - xi(j))./(xi(i) - xi(j));
             end            
         end
         suma = suma + producto;
