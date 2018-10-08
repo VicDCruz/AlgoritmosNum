@@ -49,30 +49,6 @@ parfor n = 1:N  % para cada columna
     end   
 end
 % ========================================
-
-% ===OBTENER LA CANTIDAD DE PUNTOS (inciso 2)===
-% er = .05;
-% coef = .9;
-% n=1;
-% j=1;
-% while n <= N  % para cada columna
-%     k = K * n;
-%     parfor m = 1:M
-%       puntos = [vxtrms(1,1) + dx * rand(1,k); vxtrms(2,1) + dy * rand(1,k)];
-%       cuenta = 0;
-%       for w = 1:k
-%        cuenta = cuenta + fc.contiene(puntos(:,w));   
-%       end
-%       proporcion = cuenta / k;
-%       A(m,n) = dxdy * proporcion;
-%     end
-%     if std(A(:,n))/mean(A(:,n))<er && j==1
-%         j=n;
-%         n=N;
-%     end
-%     n=n+1;
-% end
-% ============================================
 toc
 
 mA = mean(A);
@@ -92,9 +68,7 @@ end
 porcEnsayos = D/M;
 
 % ===OBTENER LA CANTIDAD DE PUNTOS (inciso 2)===
-zValue = norminv(coef + (1-coef)/2);
-cotaInf = mA(j)-sA(j)*zValue/sqrt(M);
-cotaSup = mA(j)+sA(j)*zValue/sqrt(M);
-fprintf('Confianza = %3.1f (´/,) \nEl área está entre %4.2f y %4.2f \ncon %3d ensayos mínimos\ny una estimación puntual de %3.2f, cuando n=%2.0f',...
-    (1-er)*100,cotaInf,cotaSup,j*K,mA(j), j);
+r = 0.05;
+coef = 0.90;
+minDatos(mA, r, coef, dx, dy, N)
 % ==============================================

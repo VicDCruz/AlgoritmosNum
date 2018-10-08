@@ -9,7 +9,7 @@ dx = vxtrms(1,2) - vxtrms(1,1);
 dy = vxtrms(2,2) - vxtrms(2,1);
 dxdy = dx * dy;
 M = 50;
-N = 40;
+N = 80;
 K = 100;
 A = zeros(M,N);
 tic
@@ -26,7 +26,7 @@ parfor n = 1:N  % para cada columna
     end   
 end
 toc
-AreaTeorica = 75*sqrt(3)/8-9*pi/4;
+AreaTeorica = 2.5 * sqrt(3) * 7.5 / 2 - pi * 1.5^2;
 p = AreaTeorica / dxdy;
 stdAteorica=dxdy*sqrt(p*(1-p))./sqrt(K*(1:N));
 mA = mean(A);
