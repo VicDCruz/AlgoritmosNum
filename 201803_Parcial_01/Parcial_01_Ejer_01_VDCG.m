@@ -70,5 +70,5 @@ porcEnsayos = D/M;
 % ===OBTENER LA CANTIDAD DE PUNTOS (inciso 2)===
 r = 0.05;
 coef = 0.90;
-minDatos(mA, r, coef, dx, dy, N)
+minDatos(mA, r, coef, dx, dy, K)
 % ==============================================
