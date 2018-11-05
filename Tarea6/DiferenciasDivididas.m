@@ -3,7 +3,7 @@ deltaT = 0.1;
 ciclos = 2;
 k = 20;
 f = @(t) cos(t);
-lengthCoefficients = 3;
+lengthCoefficients = k - 1;
 r = 100;
 
 t = zeros(1, k);
@@ -32,7 +32,7 @@ coefficients = coefficients';
 
 %% Recreating f(t)
 tMin = t(1);
-tMax = t(5);
+tMax = t(lengthCoefficients);
 h = (tMax - tMin) / 100;
 newT = zeros(1, r);
 for i = 1:r
@@ -42,7 +42,6 @@ newCoefficients = zeros(lengthCoefficients, r);
 for i = 1:r
     for j = 1:lengthCoefficients
         if j == 1
-            newT(i)
             newCoefficients(j, i) = newT(i) - t(j);
         else
             newCoefficients(j, i) = newCoefficients(j - 1, i) * (newT(i) - t(j));
