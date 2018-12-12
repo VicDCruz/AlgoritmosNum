@@ -35,7 +35,7 @@
 %
 % Masas:
 %
-  M = 0.05 * ones(n,1);
+  M = 1 * ones(n,1);
 %
 % La representación de las variables en el vector es 
 %

@@ -20,9 +20,7 @@
 % horas.
 % el valor de la concentración en este momento es C(5) = A*5*exp(-5/5) y
 % despejando A resulta
-c = @(t) exp(-t/5)*t^(1.25-1);
-r=raizPorNewton(c, 0, 0.001, 1000)
-A1_mg_cc = 1.25/5 * exp(1)
+A1_mg_cc = 1.25/5^1.25 * exp(1)
 
 % y en gramos
 

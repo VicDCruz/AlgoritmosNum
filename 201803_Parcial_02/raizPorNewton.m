@@ -24,7 +24,7 @@ function raiz = raizPorNewton(hf,x,eps,maxVeces)
     intervalo = abs( x1 - x );
     x = x1;
     k = k + 1;
-    sprintf('k:%d ... %f \n',k,x)
+    sprintf('k:%d ... %f \n',k,x);
   end
   raiz = x;
 end
