@@ -1,14 +1,10 @@
-function [xP, yP] = mainRungeKutta(dy, edo, cond, xi, xf, dx, xout, order)
-    %% Asignación de valores
-    y = matlabFunction(dsolve(edo, cond));
-
+function [xP, yP] = mainRungeKutta(dy, yi, xi, xf, dx, xout, order)
     %% Iniciando proceso
     xP = zeros(1, xf - xi + 1);
     yP = zeros(1, xf - xi + 1);
-    x = xi;
     m = 1;
-    xP(m) = x;
-    yP(m) = y(x);
+    xP(m) = xi;
+    yP(m) = yi;
     while xP(m) < xf
         xEnd = xP(m) + xout;
         if xEnd > xf
