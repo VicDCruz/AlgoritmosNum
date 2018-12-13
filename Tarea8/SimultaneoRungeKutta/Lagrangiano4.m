@@ -1,6 +1,6 @@
 G = 6.67408E-11; %%  m3 kg-1 s-2
 
-m=[1.9891E+30,5.9736E+24,7.349E+22];
+m=[5.9736E+24,7.349E+22,100E+3];
 %
 % cada móvil en una columna
 %
@@ -17,18 +17,18 @@ dT = (G*m(1)/w^2)^(1/3);
 dL = 3.832097031205720e+08;
 wL  = 2.0 * pi /(27.321661*86400);
 
-wS = 2.0 * pi /(24.47*86400);
-dS = 1;
+wS = 2.0 * pi /(24*60*60);
+dS = 35786000;
 
-r0 = [[dS;0;0],[dT;0;0],[dT+dL;0;0]];
+r0 = [[0;0;0],[dL;0;0],[dS;0;0]];
 vLx = - wT * dT * sin(theta) + wL * dL;
 vLy =   wT * dT * cos(theta) - wL * dL;
 
-vSx = 1;
-vSy = 220;
+vSx = wS * dS;
+vSy = wS * dS;
 
 vTy = wT * dT + wL * dL;
-v0 = [[vSx;vSy;0],[0;vTy;0],[vLx;vLy;0]];
+v0 = [[0;0;0],[vLx;vLy;0],[0;vSy;0]];
 
 deltaT=60*60;
 %Nk=1+2*60*60/deltaT; 

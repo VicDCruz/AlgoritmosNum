@@ -9,17 +9,17 @@ m=[5.9736E+24,7.349E+22,100E+3];
 % dm = 6.442580581092797e+07;   % Posterior a la Luna ( dL + dm )
 % dm = - 5.790539998830593e+07; % Anterior a la Luna  ( dL - abs(dm) )
 % dm = - 7.668119951105596e+08;   % Opuesto a la Luna
-theta = pi/3;
+theta = 0;
 
 dL = 3.832097031205720e+08;
 wL  = 2.0 * pi /(27.321661*86400); %% rad/seg
 
-r0 = [[0;0;0],[dL;0;0],[dL*cos(theta);dL*sin(theta);0]];
+r0 = [[0;0;0],[dL;0;0],[35786000;0;0]];
 vmx = - wL * dL * sin(theta);
-vmy =   wL * dL * cos(theta);
+vmy =   2*pi/(86400) * 35786000 * cos(theta);
 
 vLy = wL * dL;
-v0 = [[0;0;0],[0;vLy;0],[vmx;vmy;0]];
+v0 = [[0;0;0],[0;vLy;0],[0;vmy;0]];
 
 deltaT=1*60;
 %Nk=1+2*60*60/deltaT; 
